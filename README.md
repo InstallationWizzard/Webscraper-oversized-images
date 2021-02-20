@@ -5,7 +5,7 @@
 npm install
 ```
 ## Usage
-To start watcher simply type
-```javascript
+WEBSITE_URL is copied from browser, preferably it should be index page
+```bash
 node index.js WEBSITE_URL
 ```
