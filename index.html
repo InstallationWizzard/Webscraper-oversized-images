@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Express HTML</title>
+
+</head>
+<body>
+<h2>Oversized iamges</h2>
+<div id="oversizedImages"></div>
+<h2>Pngs</h2>
+<div id="pngs"></div>
+<h2>900px and bigger</h2>
+<div id="900bigger"></div>
+<div id="pages"></div>
+<div id="text"></div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  $(function () {
+    var socket = io();
+    socket.on('oversizedImages', function(msg){
+      $('#oversizedImages').append($('<a href="'+msg[1]+'" target="_blank"><img style="max-height:50px;max-width:50px" src="'+msg[0]+'"></a> '));
+    });
+    socket.on('pngs', function(msg){
+      $('#pngs').append($('<a href="'+msg[1]+'" target="_blank"><img style="max-height:50px;max-width:50px" src="'+msg[0]+'"></a> '));
+    });
+    socket.on('900bigger', function(msg){
+      $('#900bigger').append($('<a href="'+msg[1]+'" target="_blank"><img style="max-height:50px;max-width:50px" src="'+msg[0]+'"></a> '));
+    });
+    socket.on('page', function(msg){
+      $('#pages').append($('<a href="'+msg+'">'+msg+'</a><br>'));
+    });
+    socket.on('text', function(text){
+      $('#text').append($(`<p>${text}</p>`));
+    });
+    socket.on('reset', function(){
+      $('#oversizedImages, #pngs, #900bigger, #pages, #text').empty()
+    });
+    
+  });
+</script>
+</body>
+
+</html>
